@@ -31,7 +31,11 @@ module Enumerable
     self.my_each{ |i| return true if yield(i) == true } 
     false
   end
-
+  
+  def my_none?
+    return true if self.my_all?{|i| yield(i)} == false
+    false
+  end
 
 end
 
@@ -40,5 +44,7 @@ end
 # p [1, 2, 2, 21, 3, 3 ,4 ,7, 3].my_select(3)
 # p [7,4,5].my_all?{ |i| i > 2 }
 # p [3, 3, 2].my_all?{ |i| i == 3}
-p [1,1,1].my_any?{ |i| i > 2 }
-p [4, 1, 2].my_any?{ |i| i == 3}
+# p [1,1,1].my_any?{ |i| i > 2 }
+# p [4, 1, 2].my_any?{ |i| i == 3}
+p [3, 3, 3, 3].my_none?{ |i| i > 4}
+p [3, 3, 3, 3].my_none?{ |i| i == 3}
