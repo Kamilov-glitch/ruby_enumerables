@@ -47,6 +47,16 @@ module Enumerable
     new_arr 
   end
 
+  def my_inject(sum = 0)
+    total = sum
+    self.each{ |i| total = yield(total, i)}
+    total
+  end
+
+  def my_map_proc
+    
+  end
+
 end
 
 # [1, 3, 3].my_each{ |i| puts "hi: #{i}"} 
@@ -59,4 +69,5 @@ end
 # p [3, 3, 3, 3].my_none?{ |i| i > 4}
 # p [3, 3, 3, 3].my_none?{ |i| i == 3}
 # p [3, 2, 2, 2, 3, 1, 1, 1, 1, 1, 4].count(2)
-p [3, 2, 2].my_map{|i| i + 2}
+# p [3, 2, 2].my_map{|i| i + 2}
+p [2, 4, 5].my_inject(1){ |sum, i| sum*i}
