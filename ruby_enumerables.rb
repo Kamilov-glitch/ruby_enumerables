@@ -16,9 +16,9 @@ module Enumerable
     end
   end
 
-  def my_select(val)
+  def my_select
     arr = []
-    self.my_each { |i| arr.push(i) if i == val }
+    self.my_each { |i| arr.push(i) if yield(i) == true }
     arr
   end
 
@@ -37,14 +37,26 @@ module Enumerable
     false
   end
 
+  def my_count(val)
+    self.my_select{ |i| i == val}.length
+  end
+  
+  def my_map
+    new_arr = []
+    self.each{|i| new_arr.push(yield(i)) }
+    new_arr 
+  end
+
 end
 
 # [1, 3, 3].my_each{ |i| puts "hi: #{i}"} 
 # [1, 3, 3].my_each_with_index{ |i, indx| puts "hi: #{i}, #{indx}"} 
-# p [1, 2, 2, 21, 3, 3 ,4 ,7, 3].my_select(3)
+# p [1, 2, 2, 21, 3, 3 ,4 ,7, 3].my_select{|i| i == 3}
 # p [7,4,5].my_all?{ |i| i > 2 }
 # p [3, 3, 2].my_all?{ |i| i == 3}
 # p [1,1,1].my_any?{ |i| i > 2 }
 # p [4, 1, 2].my_any?{ |i| i == 3}
-p [3, 3, 3, 3].my_none?{ |i| i > 4}
-p [3, 3, 3, 3].my_none?{ |i| i == 3}
+# p [3, 3, 3, 3].my_none?{ |i| i > 4}
+# p [3, 3, 3, 3].my_none?{ |i| i == 3}
+# p [3, 2, 2, 2, 3, 1, 1, 1, 1, 1, 4].count(2)
+p [3, 2, 2].my_map{|i| i + 2}
