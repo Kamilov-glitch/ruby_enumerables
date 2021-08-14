@@ -53,8 +53,10 @@ module Enumerable
     total
   end
 
-  def my_map_proc
-    
+  def my_map_proc(arg)
+    new_arr = []
+    self.each{ |i| new_arr.push(arg.(i)) }
+    new_arr
   end
 
 end
@@ -70,4 +72,7 @@ end
 # p [3, 3, 3, 3].my_none?{ |i| i == 3}
 # p [3, 2, 2, 2, 3, 1, 1, 1, 1, 1, 4].count(2)
 # p [3, 2, 2].my_map{|i| i + 2}
-p [2, 4, 5].my_inject(1){ |sum, i| sum*i}
+# p [2, 4, 5].my_inject(1){ |sum, i| sum*i}
+# my_proc = Proc.new { |i| i * 2}
+# my_lambda = ->(i) { i * 2}
+# p [2, 4, 7].my_map_proc(my_lambda)
